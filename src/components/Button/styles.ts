@@ -11,27 +11,11 @@ export const Container = styled(RectButton)`
   align-items: center;
 `
 
-export const Icon = styled.Image`
-  width: 24px;
-  height: 18px;
-`
-
-export const IconWrapper = styled.View`
-  width: 56px;
-  height: 56px;
-
-  justify-content: center;
-  align-items: center;
-
-  border-right-width: 1px;
-  border-right-color: ${({ theme }) => theme.colors.line};
-`
-
 export const Label = styled.Text`
   flex: 1;
 
   font-size: 15px;
-  color: ${({ theme }) => theme.colors.heading};
   font-family: ${({ theme }) => theme.fonts.secondary_medium};
+  color: ${({ theme }) => theme.colors.heading};
   text-align: center;
 `

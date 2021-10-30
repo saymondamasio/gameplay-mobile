@@ -6,7 +6,7 @@ import {
 import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'
 import { StatusBar } from 'expo-status-bar'
-import { View } from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { ThemeProvider } from 'styled-components/native'
 import { Background } from './src/components/Background'
 import { theme } from './src/global/styles/theme'
@@ -26,10 +26,12 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Background>
-        <StatusBar style="light" translucent />
-        <Routes />
-      </Background>
+      <SafeAreaProvider>
+        <Background>
+          <StatusBar style="light" translucent backgroundColor="#00000000" />
+          <Routes />
+        </Background>
+      </SafeAreaProvider>
     </ThemeProvider>
   )
 }

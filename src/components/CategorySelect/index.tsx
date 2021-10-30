@@ -6,10 +6,15 @@ import { Container } from './styles'
 
 type Props = {
   categorySelected: string
+  hasCheckBox?: boolean
   setCategory: (categoryId: string) => void
 }
 
-export function CategorySelect({ categorySelected, setCategory }: Props) {
+export function CategorySelect({
+  categorySelected,
+  setCategory,
+  hasCheckBox = false,
+}: Props) {
   return (
     <Container>
       {categories.map(category => (
@@ -18,6 +23,7 @@ export function CategorySelect({ categorySelected, setCategory }: Props) {
           icon={category.icon}
           title={category.title}
           checked={category.id === categorySelected}
+          hasCheckBox={hasCheckBox}
           onPress={() => setCategory(category.id)}
         />
       ))}

@@ -9,12 +9,14 @@ import { Container, Content, Checked, Title, Background } from './styles'
 type Props = RectButtonProps & {
   title: string
   icon: React.FC<SvgProps>
+  hasCheckBox?: boolean
   checked?: boolean
 }
 
 export function Category({
   icon: Icon,
   title,
+  hasCheckBox = false,
   checked = false,
   ...rest
 }: Props) {
@@ -23,8 +25,14 @@ export function Category({
   return (
     <Container {...rest}>
       <Background colors={[theme.colors.secondary50, theme.colors.secondary70]}>
-        <Content checked={checked}>
-          <Checked checked={checked} />
+        <Content
+          colors={[
+            checked ? theme.colors.secondary85 : theme.colors.secondary50,
+            theme.colors.secondary40,
+          ]}
+          checked={checked}
+        >
+          {hasCheckBox && <Checked checked={checked} />}
           <Icon width={48} height={48} />
 
           <Title>{title}</Title>

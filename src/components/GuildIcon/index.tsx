@@ -1,12 +1,14 @@
 import React from 'react'
 
+import discord from '../../assets/discord.png'
+
 import { Container } from './styles'
 
 export function GuildIcon() {
   return (
     <Container
       source={{
-        uri: 'https://cdn-icons-png.flaticon.com/512/2111/2111370.png',
+        uri: 'https://pbs.twimg.com/media/DUL5XhCWsAAOrA4.jpg',
       }}
       resizeMode="cover"
     />

@@ -21,43 +21,42 @@ export const Container = styled(RectButton)`
   flex: 1;
 `
 
-export const Content = styled.View<CheckedProps>`
+export const Content = styled(LinearGradient)<CheckedProps>`
   width: 100px;
   height: 116px;
 
-  background-color: ${({ theme }) => theme.colors.secondary40};
   border-radius: 8px;
 
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
-  padding: 7px 0;
+  padding: 15px 0;
 
-  opacity: ${({ checked }) => (checked ? 1 : 0.4)};
+  opacity: ${({ checked }) => (checked ? 1 : 0.5)};
 `
 
 export const Checked = styled.View<CheckedProps>`
   ${({ theme, checked }) =>
     checked
       ? css`
+          position: absolute;
+          top: 7px;
+          right: 7px;
+
           width: 8px;
           height: 8px;
 
           background-color: ${theme.colors.primary};
-
-          align-self: flex-end;
-
-          margin-right: 7px;
         `
       : css`
-          width: 8px;
-          height: 8px;
+          position: absolute;
+          top: 7px;
+          right: 7px;
+
+          width: 10px;
+          height: 10px;
 
           background-color: ${theme.colors.secondary100};
-
-          align-self: flex-end;
-
-          margin-right: 7px;
 
           border-color: ${({ theme }) => theme.colors.secondary50};
           border-width: 1px;
@@ -66,7 +65,7 @@ export const Checked = styled.View<CheckedProps>`
 `
 
 export const Title = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.primary_medium};
+  font-family: ${({ theme }) => theme.fonts.primary_bold};
   color: ${({ theme }) => theme.colors.heading};
   font-size: 15px;
 `
