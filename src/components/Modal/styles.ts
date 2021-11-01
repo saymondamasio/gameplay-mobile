@@ -16,7 +16,6 @@ export const Bar = styled.View`
   width: 39px;
   height: 2px;
   margin-top: 13px;
-  margin-bottom: 103px;
 
   border-radius: 2px;
 

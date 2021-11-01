@@ -18,6 +18,5 @@ export const Content = styled.View`
 `
 
 export const Appointments = styled(FlatList)`
-  margin-top: 24px;
   padding-left: 24px;
 `

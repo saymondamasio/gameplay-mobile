@@ -1,16 +1,31 @@
 import React from 'react'
 
-import discord from '../../assets/discord.png'
+import DiscordIcon from '../../assets/discord.svg'
 
-import { Container } from './styles'
+import { Container, Icon } from './styles'
 
-export function GuildIcon() {
+const { CDN_IMAGE } = process.env
+
+type Props = {
+  guildId: string
+  iconId: string
+}
+
+export function GuildIcon({ guildId, iconId }: Props) {
+  const uri = `${CDN_IMAGE}/icons/${guildId}/${iconId}`
+
   return (
-    <Container
-      source={{
-        uri: 'https://pbs.twimg.com/media/DUL5XhCWsAAOrA4.jpg',
-      }}
-      resizeMode="cover"
-    />
+    <Container>
+      {iconId ? (
+        <Icon
+          source={{
+            uri,
+          }}
+          resizeMode="cover"
+        />
+      ) : (
+        <DiscordIcon width={40} height={40} />
+      )}
+    </Container>
   )
 }

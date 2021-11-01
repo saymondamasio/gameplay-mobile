@@ -36,6 +36,8 @@ export const Image = styled(LinearGradient)`
   width: 64px;
   height: 68px;
 
+  background-color: ${({ theme }) => theme.colors.secondary40};
+
   border-color: ${({ theme }) => theme.colors.secondary50};
   border-right-width: 1px;
   border-radius: 8px;

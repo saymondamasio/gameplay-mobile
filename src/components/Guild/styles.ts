@@ -9,6 +9,8 @@ export const Container = styled.TouchableOpacity`
 export const Content = styled.View`
   flex: 1;
   justify-content: center;
+
+  margin-left: 20px;
 `
 
 export const Name = styled.Text`
@@ -16,13 +18,11 @@ export const Name = styled.Text`
   color: ${({ theme }) => theme.colors.heading};
   font-size: 18px;
 
-  margin-bottom: 11px;
+  margin-bottom: 4px;
 `
 
 export const Type = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_regular};
   color: ${({ theme }) => theme.colors.heading};
   font-size: 13px;
-
-  margin-bottom: 24px;
 `

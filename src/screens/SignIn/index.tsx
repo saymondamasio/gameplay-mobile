@@ -1,17 +1,21 @@
-import { useNavigation } from '@react-navigation/core'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { Alert } from 'react-native'
+
 import illustration from '../../assets/illustration.png'
 import { Background } from '../../components/Background'
 import { ButtonIcon } from '../../components/ButtonIcon'
-import { RoutesStackParamList } from '../../routes/auth.routes'
+import { useAuth } from '../../hooks/auth'
+
 import { Container, Content, Illustration, SubTitle, Title } from './styles'
 
 export function SignIn() {
-  const navigate =
-    useNavigation<NativeStackNavigationProp<RoutesStackParamList>>()
+  const { user, signIn, loading } = useAuth()
 
-  function handleSignIn() {
-    navigate.navigate('Home')
+  async function handleSignIn() {
+    try {
+      await signIn()
+    } catch (error) {
+      Alert.alert('Erro', error.message)
+    }
   }
 
   return (
@@ -31,7 +35,11 @@ export function SignIn() {
             favoritos com seus amigos.
           </SubTitle>
 
-          <ButtonIcon label="Entrar com Discord" onPress={handleSignIn} />
+          <ButtonIcon
+            label="Entrar com Discord"
+            onPress={handleSignIn}
+            loading={loading}
+          />
         </Content>
       </Container>
     </Background>

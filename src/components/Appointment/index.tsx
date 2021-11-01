@@ -1,9 +1,12 @@
 import React from 'react'
+import { useTheme } from 'styled-components'
 import { RectButtonProps } from 'react-native-gesture-handler'
+
 import { categories } from '../../utils/categories'
 import { GuildIcon } from '../GuildIcon'
 import PlayerIcon from '../../assets/player.svg'
 import CalendarIcon from '../../assets/calendar.svg'
+import { GuildProps } from '../Guild'
 
 import {
   Container,
@@ -16,16 +19,8 @@ import {
   DateInfo,
   Date,
   Player,
+  IconContainer,
 } from './styles'
-import { useTheme } from 'styled-components'
-import { SvgProps } from 'react-native-svg'
-
-export type GuildProps = {
-  id: string
-  name: string
-  owner: boolean
-  icon: string | null
-}
 
 export type AppointmentProps = {
   id: string
@@ -50,7 +45,11 @@ export function Appointment({ data, ...rest }: Props) {
 
   return (
     <Container {...rest}>
-      <GuildIcon />
+      <IconContainer
+        colors={[theme.colors.secondary50, theme.colors.secondary70]}
+      >
+        <GuildIcon guildId={data.guild.id} iconId={data.guild.icon} />
+      </IconContainer>
 
       <Content>
         <Header>

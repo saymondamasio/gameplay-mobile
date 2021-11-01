@@ -10,6 +10,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { ThemeProvider } from 'styled-components/native'
 import { Background } from './src/components/Background'
 import { theme } from './src/global/styles/theme'
+import { AppProvider } from './src/hooks'
 import { Routes } from './src/routes'
 
 export default function App() {
@@ -27,10 +28,12 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <SafeAreaProvider>
-        <Background>
-          <StatusBar style="light" translucent backgroundColor="#00000000" />
-          <Routes />
-        </Background>
+        <AppProvider>
+          <Background>
+            <StatusBar style="light" translucent backgroundColor="#00000000" />
+            <Routes />
+          </Background>
+        </AppProvider>
       </SafeAreaProvider>
     </ThemeProvider>
   )

@@ -14,7 +14,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { Button } from '../../components/Button'
 import { Modal } from '../../components/Modal'
 import { Guilds } from '../Guilds'
-import { GuildProps } from '../../components/Appointment'
+import uuid from 'react-native-uuid'
 
 import {
   Label,
@@ -28,17 +28,31 @@ import {
   Footer,
   Image,
 } from './styles'
+import { GuildProps } from '../../components/Guild'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { COLLECTION_APPOINTMENTS } from '../../configs/database'
+import { useNavigation } from '@react-navigation/core'
 
 export function AppointmentCreate() {
   const insets = useSafeAreaInsets()
   const theme = useTheme()
+  const navigate = useNavigation()
 
   const [openGuildsModal, setOpenGuildsModal] = useState(false)
   const [guild, setGuild] = useState<GuildProps>({} as GuildProps)
+  const [day, setDay] = useState('')
+  const [month, setMonth] = useState('')
+  const [hour, setHour] = useState('')
+  const [minute, setMinute] = useState('')
+  const [description, setDescription] = useState('')
   const [category, setCategory] = useState('')
 
   function handleOpenGuilds() {
     setOpenGuildsModal(true)
+  }
+
+  function handleCloseGuilds() {
+    setOpenGuildsModal(false)
   }
 
   function handleGuildSelect(guildSelect: GuildProps) {
@@ -46,13 +60,32 @@ export function AppointmentCreate() {
     setOpenGuildsModal(false)
   }
 
+  async function handleCreateAppointment() {
+    const newAppointment = {
+      id: uuid.v4(),
+      guild,
+      category,
+      date: `${day}/${month} às ${hour}:${minute}`,
+      description,
+    }
+
+    const appointments =
+      JSON.parse(await AsyncStorage.getItem(COLLECTION_APPOINTMENTS)) || []
+    await AsyncStorage.setItem(
+      COLLECTION_APPOINTMENTS,
+      JSON.stringify([...appointments, newAppointment]),
+    )
+
+    navigate.goBack()
+  }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{ flex: 1 }}
     >
-      <ScrollView>
-        <Background styles={{ paddingBottom: insets.bottom }}>
+      <Background styles={{ paddingBottom: insets.bottom }}>
+        <ScrollView>
           <Header title="Agendar partida" />
 
           <Label style={{ marginLeft: 24, marginTop: 36, marginBottom: 18 }}>
@@ -69,7 +102,7 @@ export function AppointmentCreate() {
             <SelectButton onPress={handleOpenGuilds}>
               <SelectButtonWrapper>
                 {guild ? (
-                  <GuildIcon />
+                  <GuildIcon guildId={guild.id} iconId={guild.icon} />
                 ) : (
                   <Image
                     colors={[
@@ -93,36 +126,40 @@ export function AppointmentCreate() {
 
             <Field>
               <View>
-                <Label>Dia e mês</Label>
+                <Label style={{ marginBottom: 12 }}>Dia e mês</Label>
 
                 <Column>
-                  <SmallInput maxLength={2} />
+                  <SmallInput maxLength={2} onChangeText={setDay} />
                   <Divider>/</Divider>
-                  <SmallInput maxLength={2} />
+                  <SmallInput maxLength={2} onChangeText={setMonth} />
                 </Column>
               </View>
 
               <View>
-                <Label>Hora e minuto</Label>
+                <Label style={{ marginBottom: 12 }}>Hora e minuto</Label>
 
                 <Column>
-                  <SmallInput maxLength={2} />
+                  <SmallInput maxLength={2} onChangeText={setHour} />
                   <Divider>:</Divider>
-                  <SmallInput maxLength={2} />
+                  <SmallInput maxLength={2} onChangeText={setMinute} />
                 </Column>
               </View>
             </Field>
 
-            <TextArea label="Descrição" info="Max 100 caracteres" />
+            <TextArea
+              label="Descrição"
+              info="Max 100 caracteres"
+              onChangeText={setDescription}
+            />
 
             <Footer>
-              <Button label="Agendar" />
+              <Button label="Agendar" onPress={handleCreateAppointment} />
             </Footer>
           </Form>
-        </Background>
-      </ScrollView>
+        </ScrollView>
+      </Background>
 
-      <Modal visible={openGuildsModal}>
+      <Modal visible={openGuildsModal} onClose={handleCloseGuilds}>
         <Guilds handleGuildSelected={handleGuildSelect} />
       </Modal>
     </KeyboardAvoidingView>

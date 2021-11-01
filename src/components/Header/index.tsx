@@ -5,6 +5,7 @@ import { Feather } from '@expo/vector-icons'
 import { Container, BackButton, Title, Action } from './styles'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/core'
+import { View } from 'react-native'
 
 type Props = {
   title: string
@@ -27,7 +28,7 @@ export function Header({ title, action }: Props) {
 
       <Title>{title}</Title>
 
-      {action && <Action>{action}</Action>}
+      {action ? <Action>{action}</Action> : <View style={{ width: 24 }} />}
     </Container>
   )
 }

@@ -9,8 +9,6 @@ export const ShareButton = styled(BorderlessButton)``
 
 export const Banner = styled.ImageBackground`
   height: 234px;
-
-  margin-bottom: 30px;
 `
 
 export const BannerContent = styled.View`
@@ -31,10 +29,12 @@ export const SubTitle = styled.Text`
   font-size: 13px;
   font-family: ${({ theme }) => theme.fonts.secondary_regular};
   color: ${({ theme }) => theme.colors.heading};
+
+  line-height: 21px;
 `
 
 export const ListMembers = styled(FlatList)`
-  margin: 27px 0 0 24px;
+  margin: 0 24px;
 `
 
 export const Footer = styled.View`

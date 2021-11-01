@@ -12,6 +12,9 @@ export const Container = styled.TextInput`
 
   padding: 16px;
 
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.secondary50};
+
   margin-right: 4px;
 `
 

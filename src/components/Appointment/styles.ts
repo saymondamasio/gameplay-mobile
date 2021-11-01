@@ -1,9 +1,21 @@
+import { LinearGradient } from 'expo-linear-gradient'
 import { RectButton } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 
 type OwnerProps = {
   owner: boolean
 }
+
+export const IconContainer = styled(LinearGradient)`
+  height: 68px;
+  width: 64px;
+
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 20px;
+`
 
 export const Container = styled(RectButton)`
   flex-direction: row;

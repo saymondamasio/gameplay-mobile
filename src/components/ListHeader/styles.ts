@@ -5,6 +5,7 @@ export const Container = styled.View`
   justify-content: space-between;
   align-items: center;
   padding: 0 24px;
+  margin: 27px 0;
 `
 export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.primary_bold};
